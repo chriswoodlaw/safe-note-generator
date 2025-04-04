@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAFE Note Generator for Turkish & Central Asian Startups</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; }
+        .notice { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        form { background: #f1f5f9; padding: 20px; border-radius: 8px; }
+        label { display: block; margin: 10px 0 5px; }
+        input, select { padding: 8px; width: 100%; margin-bottom: 15px; }
+        button { background: #2c3e50; color: white; padding: 10px 15px; border: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>SAFE Note Generator</h1>
+    <div class="notice">
+        Özel olarak Türk ve Orta Asya girişimleri için tasarlanmıştır | 
+        Специально разработан для стартапов Турции и Центральной Азии
+    </div>
+    
+    <form id="safeForm">
+        <h2>Startup Information</h2>
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" required>
+        
+        <label for="founderName">Founder Name:</label>
+        <input type="text" id="founderName" required>
+        
+        <h2>Investment Terms</h2>
+        <label for="investmentAmount">Investment Amount (USD):</label>
+        <input type="number" id="investmentAmount" required>
+        
+        <label for="region">Region:</label>
+        <select id="region">
+            <option value="turkey">Turkey</option>
+            <option value="kazakhstan">Kazakhstan</option>
+            <option value="uzbekistan">Uzbekistan</option>
+        </select>
+        
+        <button type="button" onclick="generateNote()">Generate SAFE Note</button>
+    </form>
+    
+    <div id="result" style="display:none; margin-top: 30px; padding: 20px; background: #e8f4f8; border-radius: 8px;">
+        <h2>Your SAFE Note Preview</h2>
+        <div id="noteContent"></div>
+        <button onclick="downloadPDF()">Download as PDF</button>
+    </div>
+    
+    <script>
+        function generateNote() {
+            // Get form values
+            const company = document.getElementById('companyName').value;
+            const founder = document.getElementById('founderName').value;
+            const amount = document.getElementById('investmentAmount').value;
+            const region = document.getElementById('region').value;
+            
+            // Generate simple preview
+            document.getElementById('noteContent').innerHTML = `
+                <h3>${company} SAFE Note</h3>
+                <p>This SAFE note is made between ${company} (${region.toUpperCase()}) and the investor.</p>
+                <p>Investment amount: $${amount} USD</p>
+                <p>Founder: ${founder}</p>
+                <p><em>Note: This is a simplified preview. Real SAFE notes contain more legal details.</em></p>
+            `;
+            
+            // Show result section
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        function downloadPDF() {
+            alert("In a full app, this would download a PDF. For now, copy the text above.");
+        }
+    </script>
+</body>
+</html>
